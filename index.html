@@ -1,225 +1,593 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="sin-js">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FincatiX | El motor B2B para la administración de fincas</title>
-    <meta name="description" content="Software en la nube para administradores de fincas. Contabilidad por partida doble, remesas SEPA, roles y migración automática.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            500: '#2563eb', // Azul eléctrico B2B
-                            400: '#3b82f6',
-                            900: '#0f172a', // Fondo oscuro
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        html { scroll-behavior: smooth; }
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FincatiX · Administración de fincas con las cuentas claras</title>
+    <meta name="description" content="Administración de fincas para despachos de 15 a 60 comunidades: propietarios, coeficientes, presupuesto, recibos y remesas SEPA, con la contabilidad haciéndose sola.">
+    <meta name="theme-color" content="#f8f8f3">
+    <link rel="canonical" href="https://fincatix.es/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="FincatiX">
+    <meta property="og:title" content="FincatiX · Traiga su cartera. Cobre el mes. Sin descuadres.">
+    <meta property="og:description" content="Administración de fincas para despachos: propietarios, coeficientes, presupuesto, recibos y remesas SEPA, con la contabilidad haciéndose sola.">
+    <meta property="og:url" content="https://fincatix.es/">
+    <meta property="og:image" content="https://fincatix.es/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="FincatiX: Traiga su cartera. Cobre el mes. Sin descuadres. Junto a una fachada de nueve ventanas con las luces encendidas.">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="stylesheet" href="https://fonts.bunny.net/css?family=ibm-plex-sans:400,500,600,700|newsreader:400,400i,500,500i&display=swap">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-brand-900 text-slate-300 font-sans antialiased selection:bg-brand-500 selection:text-white">
+<body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
 
-    <!-- Navegación -->
-    <nav class="fixed w-full z-50 bg-brand-900/90 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="text-2xl font-bold text-white tracking-tight">Fincati<span class="text-brand-500">X</span></span>
-                </div>
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#caracteristicas" class="hover:text-white transition">Funcionalidades</a>
-                    <a href="#tecnologia" class="hover:text-white transition">Tecnología</a>
-                    <a href="#piloto" class="bg-brand-500 hover:bg-brand-400 text-white px-5 py-2 rounded-md font-semibold transition shadow-lg shadow-brand-500/30">
-                        Acceso Beta
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- ===================== CABECERA ===================== -->
+    <header class="cabecera" data-cabecera>
+        <div class="envoltorio cabecera-fila">
+            <a class="marca marca-animada" href="#inicio" aria-label="FincatiX, inicio">
+                <svg class="marca-simbolo" viewBox="0 0 44 44" width="30" height="30" aria-hidden="true">
+                    <rect class="marca-luz l-fuera" x="1" y="1" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana v1" x="16" y="1" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz l-dentro" x="31" y="1" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana v2" x="1" y="16" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz l-centro" x="16" y="16" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana v3" x="31" y="16" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz l-dentro" x="1" y="31" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana v4" x="16" y="31" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz l-fuera" x="31" y="31" width="11" height="11" rx="2"/>
+                </svg>
+                <span class="marca-palabra">Fincati<em>X</em></span>
+            </a>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div class="absolute inset-0 bg-grid z-0"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-brand-900 to-transparent z-0"></div>
-        
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-flex items-center px-4 py-2 rounded-full bg-slate-800 border border-slate-700 text-sm mb-8">
-                <span class="flex h-2 w-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
-                Fase de validación con despachos fundadores
-            </div>
-            <h1 class="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
-                El sistema operativo para el <br class="hidden md:block">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-cyan-300">administrador de nueva generación</span>
-            </h1>
-            <p class="mt-4 text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto font-light mb-10">
-                Despídete del software de escritorio obsoleto y de los menús interminables. FincatiX automatiza tu contabilidad, remesas y juntas en un entorno 100% seguro en la nube.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="#piloto" class="bg-brand-500 hover:bg-brand-400 text-white px-8 py-4 rounded-md font-bold text-lg transition shadow-lg shadow-brand-500/25 flex items-center justify-center">
-                    Solicitar plaza en el piloto <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-                <a href="#caracteristicas" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-md font-semibold text-lg transition border border-slate-700 flex items-center justify-center">
-                    Ver arquitectura
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Características Grid -->
-    <section id="caracteristicas" class="py-20 bg-slate-900 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-white mb-4">Ingeniería financiera, no solo gestión</h2>
-                <p class="text-lg text-slate-400">Diseñado desde cero para garantizar el rigor legal y contable que exige la LPH.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-slate-800/50 border border-slate-700 p-8 rounded-xl hover:border-brand-500/50 transition">
-                    <div class="w-12 h-12 bg-brand-500/20 text-brand-400 rounded-lg flex items-center justify-center text-2xl mb-6">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Partida Doble Automática</h3>
-                    <p class="text-slate-400">Libro diario invisible. El motor contable genera los asientos en segundo plano mientras tú apruebas facturas o emites recibos.</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="bg-slate-800/50 border border-slate-700 p-8 rounded-xl hover:border-brand-500/50 transition">
-                    <div class="w-12 h-12 bg-brand-500/20 text-brand-400 rounded-lg flex items-center justify-center text-2xl mb-6">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Remesas SEPA Nativas</h3>
-                    <p class="text-slate-400">Generación de ficheros bancarios con total exactitud. Control de morosidad integrado y cuadre de cajas inmediato.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="bg-slate-800/50 border border-slate-700 p-8 rounded-xl hover:border-brand-500/50 transition">
-                    <div class="w-12 h-12 bg-brand-500/20 text-brand-400 rounded-lg flex items-center justify-center text-2xl mb-6">
-                        <i class="fas fa-file-csv"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Migración sin Fricción</h3>
-                    <p class="text-slate-400">Importador inteligente desde Excel o CSV. Traspasa tus comunidades, propiedades y coeficientes (en %) en minutos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección de Tecnología (Multi-dispositivo y Seguridad) -->
-    <section id="tecnologia" class="py-20 bg-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:flex lg:items-center lg:justify-between">
-                <div class="lg:w-1/2 pr-8">
-                    <h2 class="text-3xl font-bold text-white mb-6">Arquitectura Cloud Multi-Rol</h2>
-                    <div class="space-y-6">
-                        <div class="flex">
-                            <div class="flex-shrink-0 mt-1">
-                                <i class="fas fa-mobile-alt text-brand-400 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-bold text-white">100% Funcional en Móvil</h4>
-                                <p class="text-slate-400">Gestiona incidencias a pie de calle o consulta el presupuesto durante una junta de vecinos desde tu smartphone.</p>
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="flex-shrink-0 mt-1">
-                                <i class="fas fa-users-cog text-brand-400 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-bold text-white">Roles y Permisos por Despacho</h4>
-                                <p class="text-slate-400">Asigna permisos diferenciados para contables, oficiales y administradores principales en tu equipo.</p>
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="flex-shrink-0 mt-1">
-                                <i class="fas fa-shield-alt text-brand-400 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-bold text-white">Seguridad y Respaldo</h4>
-                                <p class="text-slate-400">Base de datos encriptada, backups automáticos y cumplimiento estricto del RGPD en el tratamiento de propietarios.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:w-1/2 mt-10 lg:mt-0">
-                    <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 shadow-2xl">
-                        <div class="flex items-center space-x-2 mb-4 border-b border-slate-800 pb-4">
-                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                            <span class="ml-2 text-xs text-slate-500 font-mono">fincatix-dashboard</span>
-                        </div>
-                        <div class="space-y-4 font-mono text-sm text-slate-400">
-                            <p><span class="text-green-400">></span> Sistema inicializando...</p>
-                            <p><span class="text-green-400">></span> Conectando con servidor seguro...</p>
-                            <p><span class="text-brand-400">Cargando Comunidad:</span> 28001 - Edificio Central</p>
-                            <p><span class="text-brand-400">Procesando cuotas:</span> Cálculo por coeficiente (DECIMAL 7,4)</p>
-                            <p><span class="text-green-400">></span> Remesa SEPA CORE generada con éxito. Listo para descargar.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Piloto / CTA -->
-    <section id="piloto" class="py-24 bg-brand-600 relative overflow-hidden">
-        <!-- Decoración de fondo -->
-        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]"></div>
-        
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h2 class="text-4xl font-bold text-white mb-6">Únete al programa de despachos fundadores</h2>
-            <p class="text-xl text-brand-100 mb-10 font-light">
-                Actualmente FincatiX se encuentra en fase de validación. Buscamos despachos piloto para contrastar las migraciones, la generación de remesas y refinar la interfaz.
-            </p>
-            <div class="bg-white rounded-xl p-8 max-w-2xl mx-auto shadow-2xl text-left">
-                <h3 class="text-2xl font-bold text-slate-900 mb-4">Ventajas del Piloto</h3>
-                <ul class="space-y-3 mb-8 text-slate-600">
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i> Uso 100% gratuito durante el primer año.</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i> Soporte directo con el equipo de desarrollo.</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i> Precio especial vitalicio de "Fundador" al lanzamiento.</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i> Firma de NDA para garantizar la confidencialidad de tus datos.</li>
+            <nav class="menu" aria-label="Secciones">
+                <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu-lista" data-menu-boton>
+                    <span class="menu-boton-rayas" aria-hidden="true"></span>
+                    <span class="solo-lectores">Abrir el menú</span>
+                </button>
+                <ul class="menu-lista" id="menu-lista" data-menu-lista>
+                    <li><a href="#cartera">Su cartera</a></li>
+                    <li><a href="#circuito">El circuito del dinero</a></li>
+                    <li><a href="#cuadra">Cuentas que cuadran</a></li>
+                    <li><a href="#precio">Precio</a></li>
+                    <li><a href="#ruta">Dónde estamos</a></li>
+                    <li class="menu-accion"><a class="boton boton-pequeno" href="mailto:hola@fincatix.es?subject=Quiero%20probar%20FincatiX">Avísenme</a></li>
                 </ul>
-                <div class="text-center">
-                    <!-- Configura aquí tu email de contacto (el de Google Workspace asociado al dominio) -->
-                    <a href="mailto:luis@fincatix.es?subject=Solicitud%20de%20acceso%20-%20Despacho%20Piloto" class="inline-block w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-md font-bold text-lg transition">
-                        Contactar con el desarrollador
-                    </a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="contenido">
+
+        <!-- ===================== PORTADA ===================== -->
+        <section class="portada" id="inicio">
+            <div class="envoltorio portada-rejilla">
+                <div class="portada-texto">
+                    <p class="banda banda-marca aparece">
+                        <span class="punto-vivo" aria-hidden="true"></span>
+                        En desarrollo · abrimos pronto
+                    </p>
+                    <h1 class="titular aparece">
+                        <span class="linea">Traiga su cartera.</span>
+                        <span class="linea">Cobre el mes.</span>
+                        <span class="linea"><em>Sin descuadres.</em></span>
+                    </h1>
+                    <p class="entradilla aparece">
+                        FincatiX es la administración de fincas para despachos que llevan de 15 a 60 comunidades:
+                        propietarios, coeficientes, presupuesto, recibos y remesas SEPA, con la contabilidad haciéndose sola.
+                    </p>
+                    <p class="entradilla entradilla-pequena aparece">
+                        Cubre el 90&nbsp;% del trabajo de cada día. El otro 10&nbsp;% se queda fuera <em>a propósito</em>.
+                    </p>
+                    <div class="acciones aparece">
+                        <a class="boton" href="mailto:hola@fincatix.es?subject=Quiero%20probar%20FincatiX">
+                            <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+                            Avísenme cuando abra
+                        </a>
+                        <a class="boton boton-gris" href="#circuito">Ver el circuito del dinero</a>
+                    </div>
+                    <p class="nota-pie aparece">Para probarlo no pediremos tarjeta ni CIF.</p>
+                </div>
+
+                <!-- La fachada: el simbolo de la marca, en grande. Las ventanas suben
+                     y las luces se encienden; despues, alguna se apaga y otra se
+                     enciende, como una finca al caer la tarde. -->
+                <div class="portada-dibujo" aria-hidden="true">
+                    <svg class="fachada" viewBox="0 0 340 420" data-fachada>
+                        <rect class="fachada-tejado" x="34" y="36" width="272" height="16" rx="3"/>
+                        <rect class="fachada-cuerpo" x="44" y="52" width="252" height="336" rx="4"/>
+                        <g data-ventanas></g>
+                        <rect class="fachada-puerta" x="150" y="322" width="40" height="66" rx="3"/>
+                        <rect class="fachada-portal" x="140" y="314" width="60" height="8" rx="2"/>
+                        <line class="fachada-suelo" x1="0" y1="389" x2="340" y2="389"/>
+                    </svg>
+
+                    <!-- Tres cosas que la aplicacion dice de verdad, flotando junto a la finca. -->
+                    <div class="flotante flotante-1">
+                        <span class="versalita">Coeficientes · Gastos generales</span>
+                        <span class="cifra-flotante">100,0000&nbsp;%</span>
+                        <span class="pildora pildora-ok">Cuadra</span>
+                    </div>
+                    <div class="flotante flotante-2">
+                        <span class="flotante-titulo">3º B · Octubre 2026</span>
+                        <span class="flotante-fila"><span class="tenue">Enrique Prieto Vargas</span><strong>62,94</strong></span>
+                        <span class="pildora pildora-info">En remesa</span>
+                    </div>
+                    <div class="flotante flotante-3">
+                        <span class="versalita">Nueva remesa</span>
+                        <span class="flotante-fila"><strong>65</strong><span class="tenue">recibos</span></span>
+                        <span class="flotante-fila"><strong>28</strong><span class="tenue">cargos al banco</span></span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 py-12 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0">
-                <span class="text-2xl font-bold text-white">Fincati<span class="text-brand-500">X</span></span>
-                <p class="text-sm text-slate-500 mt-2">Tecnología para administradores de fincas.</p>
+        <!-- Cinta con lo que el producto es, sin adjetivos. -->
+        <div class="cinta" aria-label="En pocas palabras">
+            <div class="cinta-pista">
+                <ul class="cinta-lista">
+                    <li>Ley de Propiedad Horizontal</li>
+                    <li>Remesas SEPA CORE</li>
+                    <li>Partida doble</li>
+                    <li>Coeficientes a cuatro decimales</li>
+                    <li>Una base de datos por despacho</li>
+                    <li>Sin claves de su banco</li>
+                    <li>Hecho en España</li>
+                </ul>
+                <ul class="cinta-lista" aria-hidden="true">
+                    <li>Ley de Propiedad Horizontal</li>
+                    <li>Remesas SEPA CORE</li>
+                    <li>Partida doble</li>
+                    <li>Coeficientes a cuatro decimales</li>
+                    <li>Una base de datos por despacho</li>
+                    <li>Sin claves de su banco</li>
+                    <li>Hecho en España</li>
+                </ul>
             </div>
-            <div class="flex space-x-6 text-sm text-slate-500">
-                <span>&copy; 2026 FincatiX. Todos los derechos reservados.</span>
-                <!-- Textos legales para cuando los necesites, vinculados a la oficina virtual -->
-                <a href="#" class="hover:text-white transition">Aviso Legal</a>
-                <a href="#" class="hover:text-white transition">Privacidad</a>
+        </div>
+
+        <!-- ===================== LA FRASE ===================== -->
+        <section class="frase" aria-label="Por qué FincatiX">
+            <div class="envoltorio">
+                <p class="frase-texto" data-frase>
+                    ¿Su programa de ahora es lento y le obliga a recordar dónde está cada cosa?
+                    <span class="frase-respuesta">Aquí hay pocas puertas, no pocas cosas detrás de cada puerta.</span>
+                </p>
             </div>
+        </section>
+
+        <!-- ===================== SU CARTERA ===================== -->
+        <section class="seccion" id="cartera">
+            <div class="envoltorio seccion-rejilla">
+                <div class="seccion-texto aparece">
+                    <p class="versalita versalita-marca">El importador</p>
+                    <h2>Traiga su cartera, <em>no su historia</em>.</h2>
+                    <p>
+                        Suelte el Excel tal como sale de su programa: con su título, su logotipo, sus filas en blanco
+                        y sus subtotales; los pisos en una hoja y los propietarios en otra. El asistente encuentra la
+                        cabecera, cruza las tablas y le enseña la comunidad tal como va a quedar, antes de escribir nada.
+                    </p>
+                    <ul class="lista-marcas">
+                        <li>Cada columna con su destino a la vista: <strong>seguro</strong>, <strong>propuesto</strong> o <strong>sin decidir</strong>.</li>
+                        <li>En rojo lo que impide importar; en ámbar lo que solo avisa.</li>
+                        <li>Excel, ODS o CSV. Cabeceras en castellano y en catalán.</li>
+                        <li>Y si algo no era: <span class="etiqueta">«Deshacer la importación»</span> deja la comunidad vacía, mientras no tenga movimientos.</li>
+                    </ul>
+                    <blockquote class="cita">
+                        No migramos su historia: le traemos su cartera y su posición de hoy,
+                        y su programa antiguo le queda de archivo.
+                    </blockquote>
+                </div>
+
+                <!-- La hoja fea se ordena sola. -->
+                <div class="importador" data-importador aria-hidden="true">
+                    <div class="hoja hoja-fea">
+                        <div class="hoja-pestana">listado_propietarios_2025.xlsx</div>
+                        <div class="hoja-celdas">
+                            <div class="hf hf-titulo" data-sobra>COMUNIDAD DE PROPIETARIOS EL MIRADOR DEL SECARRAL</div>
+                            <div class="hf hf-sub" data-sobra>Listado actualizado · uso interno</div>
+                            <div class="hf hf-vacia" data-sobra></div>
+                            <div class="hf hf-cabecera"><span>Piso</span><span>Propietario</span><span>%</span><span>Cta.</span></div>
+                            <div class="hf"><span>1º A</span><span>RUBIO HERRERO, RAQUEL</span><span>3,0000</span><span>ES92 …</span></div>
+                            <div class="hf"><span>1º B</span><span>PRIETO VARGAS, ENRIQUE</span><span>3,2500</span><span></span></div>
+                            <div class="hf hf-subtotal" data-sobra><span>Subtotal portal 1</span><span></span><span>6,2500</span><span></span></div>
+                            <div class="hf"><span>Garaje 12</span><span>SANZ PASTOR, NATALIA</span><span>0,6200</span><span>ES21 …</span></div>
+                        </div>
+                    </div>
+
+                    <div class="importador-flecha"><span>se ordena</span></div>
+
+                    <div class="hoja hoja-limpia">
+                        <div class="hoja-cabeceras">
+                            <span class="col-mapeo"><span class="versalita">Código</span><span class="mapeo mapeo-seguro">seguro</span></span>
+                            <span class="col-mapeo"><span class="versalita">Propietario</span><span class="mapeo mapeo-seguro">seguro</span></span>
+                            <span class="col-mapeo"><span class="versalita">Coeficiente</span><span class="mapeo mapeo-seguro">seguro</span></span>
+                            <span class="col-mapeo"><span class="versalita">IBAN</span><span class="mapeo mapeo-propuesto">propuesto</span></span>
+                        </div>
+                        <div class="fila-limpia"><span>1º A</span><span>Raquel Rubio Herrero</span><span class="num">3,0000</span><span class="num">ES92 •••• 3413</span></div>
+                        <div class="fila-limpia"><span>1º B</span><span>Enrique Prieto Vargas</span><span class="num">3,2500</span><span><span class="celda-aviso">sin IBAN</span></span></div>
+                        <div class="fila-limpia"><span>Garaje 12</span><span>Natalia Sanz Pastor</span><span class="num">0,6200</span><span class="num">ES21 •••• 0882</span></div>
+                        <div class="hoja-pie"><span class="tenue">Fuera: el título, la fila en blanco y el subtotal.</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== EL CIRCUITO ===================== -->
+        <section class="seccion seccion-papel" id="circuito">
+            <div class="envoltorio">
+                <div class="seccion-cabecera aparece">
+                    <p class="versalita versalita-marca">El circuito del dinero</p>
+                    <h2>De la junta al banco, <em>sin perder un céntimo</em>.</h2>
+                    <p>Cada paso enseña el resultado entero antes de confirmar: cuánto paga cada propiedad, cuántos recibos salen y quién se queda fuera, y por qué.</p>
+                </div>
+
+                <ol class="circuito" data-circuito>
+                    <li class="paso">
+                        <span class="paso-nodo" aria-hidden="true">1</span>
+                        <h3>Presupuesto</h3>
+                        <p>Nace copiando el del año anterior, con lo presupuestado y lo gastado al lado de cada línea. Comprueba el mínimo legal del fondo de reserva.</p>
+                    </li>
+                    <li class="paso">
+                        <span class="paso-nodo" aria-hidden="true">2</span>
+                        <h3>Cuotas</h3>
+                        <p>Cuánto paga cada propiedad, la cuota anterior y la diferencia: <em>«el 3º A sube 4,10 € al mes»</em>. Mensual, trimestral o como acuerde la junta.</p>
+                    </li>
+                    <li class="paso">
+                        <span class="paso-nodo" aria-hidden="true">3</span>
+                        <h3>Recibos</h3>
+                        <p>Uno por propiedad, con el propietario y el coeficiente del día en que se emite. Quien vende en marzo no recibe el de abril.</p>
+                    </li>
+                    <li class="paso">
+                        <span class="paso-nodo" aria-hidden="true">4</span>
+                        <h3>Remesa SEPA</h3>
+                        <p>El fichero de adeudos que se sube al banco, con un solo cargo por propietario y cuenta, y los recibos que no pueden ir, con su motivo.</p>
+                    </li>
+                    <li class="paso paso-pronto">
+                        <span class="paso-nodo" aria-hidden="true">5</span>
+                        <h3>Extracto del banco <span class="pildora pildora-aviso">En desarrollo</span></h3>
+                        <p>Suba el Norma 43: los cobros de la remesa y las devoluciones se emparejan solos con sus recibos.</p>
+                    </li>
+                    <li class="paso paso-pronto">
+                        <span class="paso-nodo" aria-hidden="true">6</span>
+                        <h3>Liquidación <span class="pildora pildora-aviso">En desarrollo</span></h3>
+                        <p>Por caja: lo cobrado menos lo pagado, que cuadra con el banco que el vecino puede comprobar.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ===================== LA REMESA ===================== -->
+        <section class="seccion" id="remesa">
+            <div class="envoltorio seccion-rejilla seccion-rejilla-invertida">
+                <div class="seccion-texto aparece">
+                    <p class="versalita versalita-marca">Remesas</p>
+                    <h2>Un cargo por propietario. <em>Y lo ve antes de enviarlo.</em></h2>
+                    <p>
+                        Si un propietario tiene piso y garaje, o cuota y derrama, y paga desde la misma cuenta,
+                        el banco le pasa un solo adeudo con todos sus recibos. La deuda sigue siendo de cada propiedad,
+                        como manda la ley.
+                    </p>
+                    <p>
+                        Antes de generar el fichero, la pantalla dice cuántos cargos irán al banco y qué recibos se quedan
+                        fuera: sin IBAN, sin mandato, con el IBAN mal escrito. Lo que falta, con su nombre y adónde ir a completarlo.
+                    </p>
+                    <div class="contador-grande">
+                        <span class="contador-cifra" data-contar="65">0</span><span class="contador-texto">recibos</span>
+                        <svg class="contador-flecha" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+                        <span class="contador-cifra contador-marca" data-contar="28">0</span><span class="contador-texto">cargos</span>
+                    </div>
+                </div>
+
+                <!-- La pantalla «Nueva remesa», dibujada con el estilo de la aplicacion. -->
+                <div class="ventana aparece" aria-hidden="true">
+                    <div class="ventana-barra"><span></span><span></span><span></span><em>mirador.fincatix.es</em></div>
+                    <div class="app">
+                        <aside class="app-lateral">
+                            <span class="app-marca">
+                                <svg viewBox="0 0 44 44" width="18" height="18"><rect class="marca-luz" x="1" y="1" width="11" height="11" rx="2"/><rect class="marca-ventana" x="16" y="1" width="11" height="11" rx="2"/><rect class="marca-luz" x="31" y="1" width="11" height="11" rx="2"/><rect class="marca-ventana" x="1" y="16" width="11" height="11" rx="2"/><rect class="marca-luz" x="16" y="16" width="11" height="11" rx="2"/><rect class="marca-ventana" x="31" y="16" width="11" height="11" rx="2"/><rect class="marca-luz" x="1" y="31" width="11" height="11" rx="2"/><rect class="marca-ventana" x="16" y="31" width="11" height="11" rx="2"/><rect class="marca-luz" x="31" y="31" width="11" height="11" rx="2"/></svg>
+                                Fincati<em>X</em>
+                            </span>
+                            <span class="app-item">Resumen</span>
+                            <span class="app-item">Propiedades</span>
+                            <span class="app-item">Propietarios</span>
+                            <span class="app-item">Presupuesto</span>
+                            <span class="app-item app-activo">Cobros</span>
+                            <span class="app-item">Contabilidad</span>
+                        </aside>
+                        <div class="app-cuerpo">
+                            <span class="app-migas versalita">Cobros › Nueva remesa</span>
+                            <span class="app-titulo">Nueva remesa</span>
+                            <div class="app-banda">3 recibos se quedan fuera: les falta el mandato. Abajo, con su motivo.</div>
+                            <div class="app-cifras">
+                                <span><span class="versalita">Adeudos</span><strong>28</strong><small>65 recibos</small></span>
+                                <span><span class="versalita">Total</span><strong>2.032,86 €</strong></span>
+                                <span><span class="versalita">Cargo</span><strong>31/10/2026</strong></span>
+                            </div>
+                            <div class="agrupa" data-agrupa>
+                                <div class="agrupa-recibos">
+                                    <span class="recibo-chip">Octubre 2026 · 3º A <strong>58,28</strong></span>
+                                    <span class="recibo-chip">Octubre 2026 · Garaje 12 <strong>12,40</strong></span>
+                                    <span class="recibo-chip">Fachada · Plazo 1 de 4 · 3º A <strong>41,00</strong></span>
+                                </div>
+                                <div class="agrupa-flecha"><span>un solo cargo</span></div>
+                                <div class="agrupa-cargo">
+                                    <span class="agrupa-deudor">Raquel Rubio Herrero<small>mandato MIRADOR-0030 · ES92 •••• 3413</small></span>
+                                    <span class="agrupa-importe">111,68 €<small>1 cargo · 3 recibos</small></span>
+                                </div>
+                            </div>
+                            <div class="app-boton">Generar la remesa</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== CUENTAS QUE CUADRAN ===================== -->
+        <section class="seccion seccion-papel" id="cuadra">
+            <div class="envoltorio">
+                <div class="seccion-cabecera aparece">
+                    <p class="versalita versalita-marca">Cuentas que cuadran</p>
+                    <h2>Lo que no cuadra, <em>no se guarda</em>.</h2>
+                    <p>Las reglas que un despacho no se puede saltar las cumple el programa, no la memoria de quien lo usa.</p>
+                </div>
+
+                <div class="tres">
+                    <article class="pieza aparece" data-pieza-coeficientes>
+                        <span class="pieza-cifra"><span data-contar="100" data-decimales="4">0,0000</span>&nbsp;%</span>
+                        <div class="barra" aria-hidden="true"><span class="barra-relleno"></span></div>
+                        <span class="pildora pildora-ok pieza-pildora">Cuadra</span>
+                        <h3>Coeficientes a cuatro decimales</h3>
+                        <p>La matriz se niega a guardar un grupo que no suma exactamente el cien por cien, y el reparto se niega a usarlo. Un 99,96&nbsp;% no pasa.</p>
+                    </article>
+
+                    <article class="pieza aparece">
+                        <span class="pieza-cifra pieza-balanza">
+                            <span class="balanza-lado"><span class="versalita">Debe</span><span data-contar="2032.86" data-decimales="2">0,00</span></span>
+                            <span class="balanza-igual" aria-hidden="true">=</span>
+                            <span class="balanza-lado"><span class="versalita">Haber</span><span data-contar="2032.86" data-decimales="2">0,00</span></span>
+                        </span>
+                        <h3>Partida doble que se hace sola</h3>
+                        <p>Emitir, cobrar en caja o anular dejan su asiento sin teclear nada. Un asiento que no cuadra no se graba. Diario y Mayor, siempre al día.</p>
+                    </article>
+
+                    <article class="pieza aparece" data-pieza-centimos>
+                        <span class="pieza-cifra pieza-reparto">
+                            <span class="reparto-total">100,00 €</span>
+                            <span class="reparto-partes">
+                                <span>33,34</span><span>33,33</span><span>33,33</span>
+                            </span>
+                        </span>
+                        <h3>Ni un céntimo perdido</h3>
+                        <p>Los repartos se hacen en céntimos y el que sobra va a quien le toca. Cien euros entre tres suman cien euros, no 99,99.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== POCAS PUERTAS ===================== -->
+        <section class="seccion" id="puertas">
+            <div class="envoltorio seccion-rejilla">
+                <div class="seccion-texto aparece">
+                    <p class="versalita versalita-marca">La pantalla</p>
+                    <h2>Todo a tres clics. <em>Y Ctrl+K para lo demás.</em></h2>
+                    <p>
+                        Un menú corto y siempre a la vista, ordenado por lo que usted hace —cobrar, presupuestar, contabilizar—
+                        y no por las tablas de una base de datos. Listados de cincuenta filas, cifras alineadas por la coma
+                        y el color solo cuando significa algo: verde cuadra, ámbar falta, rojo debe.
+                    </p>
+                    <p>
+                        Cuando llama un vecino, se escribe su nombre y aparece con su comunidad, su teléfono y su cargo en la junta,
+                        de todas las comunidades que usted lleva.
+                    </p>
+                    <button class="boton boton-gris" type="button" data-abrir-buscador>
+                        <span class="tecla">Ctrl</span><span class="tecla">K</span> Pruebe el buscador
+                    </button>
+                </div>
+
+                <div class="buscador-demo aparece" aria-hidden="true">
+                    <div class="buscador-caja">
+                        <svg class="icono" viewBox="0 0 24 24"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+                        <span class="buscador-escrito" data-escribe="Raquel"></span><span class="cursor"></span>
+                    </div>
+                    <div class="buscador-resultados">
+                        <span class="versalita">Propietarios</span>
+                        <div class="resultado resultado-activo">
+                            <strong>Raquel Rubio Herrero</strong>
+                            <span class="tenue">El Mirador del Secarral · 600 ••• ••• · Vocal</span>
+                        </div>
+                        <div class="resultado">
+                            <strong>Raquel Ortega Lamas</strong>
+                            <span class="tenue">Residencial Los Almendros · 611 ••• ••• · Presidenta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== CONFIANZA ===================== -->
+        <section class="seccion seccion-oscura" id="confianza">
+            <div class="envoltorio">
+                <div class="seccion-cabecera aparece">
+                    <p class="versalita">Con el dinero de otros</p>
+                    <h2>Tres reglas que <em>no tienen excepción</em>.</h2>
+                </div>
+                <div class="tres">
+                    <article class="regla aparece">
+                        <svg class="icono icono-grande" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/></svg>
+                        <h3>Su despacho, su base de datos</h3>
+                        <p>Cada despacho trabaja en su propia base de datos, separada de las demás. Dentro, cada administrador ve solo las comunidades que se le asignan.</p>
+                    </article>
+                    <article class="regla aparece">
+                        <svg class="icono icono-grande" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+                        <h3>Nunca le pedimos las claves de su banco</h3>
+                        <p>FincatiX no pide, no guarda y no transmite credenciales de banca online. Los extractos se suben a mano: es el camino que no se rompe.</p>
+                    </article>
+                    <article class="regla aparece">
+                        <svg class="icono icono-grande" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                        <h3>Nada se borra a escondidas</h3>
+                        <p>Un recibo no se borra: se anula, con su motivo y su asiento inverso. Una remesa tampoco: se anula y sus recibos vuelven a estar pendientes.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== LO QUE NO HACEMOS ===================== -->
+        <section class="seccion" id="alcance">
+            <div class="envoltorio seccion-rejilla">
+                <div class="seccion-texto aparece">
+                    <p class="versalita versalita-marca">El 10&nbsp;% que se queda fuera</p>
+                    <h2>Lo que no hacemos, <em>y por qué</em>.</h2>
+                    <p>
+                        Toda obligación legal entra, aunque sea en su versión más manual. Toda comodidad que no sea imprescindible, después.
+                        Así el programa sigue siendo rápido de aprender y rápido de usar.
+                    </p>
+                </div>
+                <ul class="no-hacemos aparece">
+                    <li><strong>No emitimos sus facturas</strong> de la antena o del local: para eso ya tiene su programa.</li>
+                    <li><strong>No migramos quince años de historia.</strong> Le traemos la cartera y la posición de hoy.</li>
+                    <li><strong>No liquidamos por devengo</strong>, solo por caja: para que la liquidación cuadre con el banco.</li>
+                    <li><strong>No tramitamos monitorios</strong>: el certificado de deuda, sí; la demanda, con su abogado.</li>
+                    <li><strong>No cubrimos el Llibre V catalán</strong> ni las haciendas forales de País Vasco y Navarra.</li>
+                    <li><strong>No hay app que instalar</strong>: el portal del vecino será una web para el móvil.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===================== PRECIO ===================== -->
+        <section class="seccion seccion-papel" id="precio">
+            <div class="envoltorio">
+                <div class="seccion-cabecera aparece">
+                    <p class="versalita versalita-marca">Precio</p>
+                    <h2>Un precio. <em>Sin planes.</em></h2>
+                    <p>Se paga por propiedad activa, lleve las comunidades que lleve. Sin tarjeta y sin CIF para probarlo; después, por factura, como paga su despacho todo lo demás.</p>
+                </div>
+
+                <div class="precio aparece">
+                    <div class="precio-cifra">
+                        <span class="precio-numero">0,25&nbsp;€</span>
+                        <span class="precio-unidad">al mes por propiedad</span>
+                    </div>
+                    <div class="calculadora">
+                        <label class="versalita" for="propiedades">¿Cuántas propiedades lleva su despacho?</label>
+                        <input type="range" id="propiedades" min="100" max="5000" step="50" value="800" data-calculadora>
+                        <p class="calculadora-resultado">
+                            <span data-calculadora-propiedades>800</span> propiedades
+                            <span class="calculadora-igual">=</span>
+                            <strong><span data-calculadora-total>200</span>&nbsp;€</strong> al mes
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== DONDE ESTAMOS ===================== -->
+        <section class="seccion" id="ruta">
+            <div class="envoltorio">
+                <div class="seccion-cabecera aparece">
+                    <p class="versalita versalita-marca">Dónde estamos</p>
+                    <h2>Lo que hay, <em>lo que viene</em>.</h2>
+                    <p>Sin humo: esto es lo que ya está construido y lo que falta para abrir.</p>
+                </div>
+
+                <div class="ruta">
+                    <div class="ruta-columna aparece">
+                        <h3><span class="pildora pildora-ok">Construido</span></h3>
+                        <ul>
+                            <li>Comunidades, propiedades y propietarios, con su junta</li>
+                            <li>Grupos de reparto y matriz de coeficientes</li>
+                            <li>Importador de cartera desde Excel, ODS o CSV</li>
+                            <li>Plan contable de comunidades y partida doble</li>
+                            <li>Presupuesto, cuotas y derramas en plazos</li>
+                            <li>Recibos, cobro en caja y remesas SEPA</li>
+                        </ul>
+                    </div>
+                    <div class="ruta-columna aparece">
+                        <h3><span class="pildora pildora-aviso">En desarrollo</span></h3>
+                        <ul>
+                            <li>Extractos Norma 43 y conciliación</li>
+                            <li>Devoluciones y certificado de deuda</li>
+                            <li>Facturas de proveedores</li>
+                            <li>Tesorería: el dinero de verdad disponible</li>
+                            <li>Liquidación y cierre del ejercicio</li>
+                        </ul>
+                    </div>
+                    <div class="ruta-columna aparece">
+                        <h3><span class="pildora pildora-gris">Después</span></h3>
+                        <ul>
+                            <li>Incidencias, proveedores y contratos</li>
+                            <li>Modelos 347 y 111</li>
+                            <li>Juntas, convocatorias y actas</li>
+                            <li>Portal del vecino</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== CIERRE ===================== -->
+        <section class="cierre">
+            <div class="envoltorio cierre-caja aparece">
+                <svg class="cierre-simbolo" viewBox="0 0 44 44" aria-hidden="true" data-cierre-simbolo>
+                    <rect class="marca-luz" x="1" y="1" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana" x="16" y="1" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz" x="31" y="1" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana" x="1" y="16" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz" x="16" y="16" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana" x="31" y="16" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz" x="1" y="31" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana" x="16" y="31" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz" x="31" y="31" width="11" height="11" rx="2"/>
+                </svg>
+                <h2>Abrimos pronto.</h2>
+                <p>Escríbanos y les avisamos los primeros. Si llevan su cartera en un Excel con años de parches, mejor: es justo lo que queremos ver.</p>
+                <a class="boton boton-grande" href="mailto:hola@fincatix.es?subject=Quiero%20probar%20FincatiX">Avísenme cuando abra</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <div class="envoltorio pie-fila">
+            <span class="marca marca-pequena">
+                <svg class="marca-simbolo" viewBox="0 0 44 44" width="22" height="22" aria-hidden="true">
+                    <rect class="marca-luz" x="1" y="1" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana" x="16" y="1" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz" x="31" y="1" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana" x="1" y="16" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz" x="16" y="16" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana" x="31" y="16" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz" x="1" y="31" width="11" height="11" rx="2"/>
+                    <rect class="marca-ventana" x="16" y="31" width="11" height="11" rx="2"/>
+                    <rect class="marca-luz" x="31" y="31" width="11" height="11" rx="2"/>
+                </svg>
+                <span class="marca-palabra">Fincati<em>X</em></span>
+            </span>
+            <span class="tenue">Administración de fincas · Ley de Propiedad Horizontal</span>
+            <span class="tenue">© 2026 FincatiX · <a href="mailto:hola@fincatix.es">hola@fincatix.es</a></span>
         </div>
     </footer>
 
+    <!-- El buscador de prueba: se abre con Ctrl+K o con el boton de su seccion. -->
+    <div class="paleta" role="dialog" aria-modal="true" aria-labelledby="paleta-titulo" hidden data-paleta>
+        <div class="paleta-fondo" data-cerrar-paleta></div>
+        <div class="paleta-caja">
+            <h2 class="solo-lectores" id="paleta-titulo">Buscador de prueba</h2>
+            <label class="paleta-campo">
+                <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+                <span class="solo-lectores">Buscar</span>
+                <input type="search" placeholder="Nombre, NIF, código de propiedad…" autocomplete="off" data-paleta-entrada>
+                <span class="tecla">Esc</span>
+            </label>
+            <div class="paleta-resultados" data-paleta-resultados></div>
+            <p class="paleta-pie tenue">Es una muestra con datos inventados de una comunidad de prueba.</p>
+        </div>
+    </div>
+
+    <script src="main.js" defer></script>
 </body>
 </html>

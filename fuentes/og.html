@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=ibm-plex-sans:400,500,600,700|newsreader:400,400i,500,500i&display=block">
+<style>
+    :root {
+        --papel: #f8f8f3; --linea: #e1e0d6; --tinta: #1c1a17; --tinta-2: #5d574d; --tinta-25: #6f6959;
+        --marca: #3f7d5e; --marca-800: #2a553f; --luz: #fcd34d; --blanco: #ffffff;
+        --ok-100: #e2efe6; --ok-800: #2f6b45;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body {
+        position: relative;
+        background: var(--papel);
+        color: var(--tinta);
+        font-family: "IBM Plex Sans", sans-serif;
+        font-variant-numeric: tabular-nums;
+    }
+    body::before {
+        content: ""; position: absolute; inset: 0;
+        background-image: linear-gradient(var(--linea) 1px, transparent 1px), linear-gradient(90deg, var(--linea) 1px, transparent 1px);
+        background-size: 44px 44px; opacity: .55;
+        -webkit-mask-image: radial-gradient(ellipse 70% 80% at 75% 45%, black 25%, transparent 78%);
+    }
+    .marca { position: absolute; left: 72px; top: 64px; display: flex; align-items: center; gap: 14px; }
+    .marca-palabra { font-weight: 700; font-size: 40px; letter-spacing: -.02em; }
+    .marca-palabra em { font-style: normal; font-weight: 800; color: var(--marca); }
+    .v { fill: var(--marca); stroke: var(--tinta); stroke-width: 2; }
+    .l { fill: var(--luz); stroke: var(--tinta); stroke-width: 2; }
+    h1 {
+        position: absolute; left: 72px; top: 178px;
+        font-family: "Newsreader", serif; font-weight: 500; font-size: 84px; line-height: 1.0; letter-spacing: -.025em;
+    }
+    h1 span { display: block; }
+    h1 em { color: var(--marca); }
+    .pie { position: absolute; left: 76px; bottom: 62px; font-size: 22px; color: var(--tinta-2); }
+    .pie strong { color: var(--tinta); font-weight: 600; }
+    .fachada { position: absolute; right: 96px; top: 70px; width: 380px; }
+    .cuerpo { fill: var(--blanco); stroke: var(--tinta); stroke-width: 2.5; }
+    .tejado, .portal { fill: var(--tinta); }
+    .puerta { fill: var(--marca-800); stroke: var(--tinta); stroke-width: 2; }
+    .suelo { stroke: var(--tinta); stroke-width: 2.5; stroke-linecap: round; }
+    .tarjeta {
+        position: absolute; right: 48px; top: 318px; display: grid; gap: 6px;
+        padding: 16px 18px; background: var(--blanco); border: 1px solid var(--linea); border-radius: 10px;
+        box-shadow: 0 16px 34px -22px rgba(28, 26, 23, .45);
+    }
+    .versalita { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; color: var(--tinta-25); }
+    .cifra { font-size: 30px; font-weight: 600; }
+    .pildora { justify-self: start; padding: 2px 9px; font-size: 14px; font-weight: 500; border-radius: 6px; background: var(--ok-100); color: var(--ok-800); }
+</style>
+</head>
+<body>
+    <div class="marca">
+        <svg viewBox="0 0 44 44" width="48" height="48">
+            <rect class="l" x="1" y="1" width="11" height="11" rx="2"/><rect class="v" x="16" y="1" width="11" height="11" rx="2"/><rect class="l" x="31" y="1" width="11" height="11" rx="2"/>
+            <rect class="v" x="1" y="16" width="11" height="11" rx="2"/><rect class="l" x="16" y="16" width="11" height="11" rx="2"/><rect class="v" x="31" y="16" width="11" height="11" rx="2"/>
+            <rect class="l" x="1" y="31" width="11" height="11" rx="2"/><rect class="v" x="16" y="31" width="11" height="11" rx="2"/><rect class="l" x="31" y="31" width="11" height="11" rx="2"/>
+        </svg>
+        <span class="marca-palabra">Fincati<em>X</em></span>
+    </div>
+
+    <h1><span>Traiga su cartera.</span><span>Cobre el mes.</span><span><em>Sin descuadres.</em></span></h1>
+
+    <p class="pie">Administración de fincas · <strong>fincatix.es</strong></p>
+
+    <svg class="fachada" viewBox="0 0 340 420">
+        <rect class="tejado" x="34" y="36" width="272" height="16" rx="3"/>
+        <rect class="cuerpo" x="44" y="52" width="252" height="336" rx="4"/>
+        <g id="ventanas"></g>
+        <rect class="puerta" x="150" y="322" width="40" height="66" rx="3"/>
+        <rect class="portal" x="140" y="314" width="60" height="8" rx="2"/>
+        <line class="suelo" x1="0" y1="389" x2="340" y2="389"/>
+    </svg>
+
+    <div class="tarjeta">
+        <span class="versalita">Coeficientes · Gastos generales</span>
+        <span class="cifra">100,0000&nbsp;%</span>
+        <span class="pildora">Cuadra</span>
+    </div>
+
+<script>
+    // La misma fachada que la portada, con sus luces de siempre encendidas.
+    var g = document.getElementById('ventanas'), NS = 'http://www.w3.org/2000/svg', n = 0;
+    var encendidas = [0, 3, 5, 6, 9, 12, 14, 15, 17, 19, 20];
+    function v(x, y, w, h) {
+        var r = document.createElementNS(NS, 'rect');
+        r.setAttribute('x', x); r.setAttribute('y', y); r.setAttribute('width', w); r.setAttribute('height', h); r.setAttribute('rx', 3);
+        r.setAttribute('class', encendidas.indexOf(n++) !== -1 ? 'l' : 'v');
+        g.appendChild(r);
+    }
+    [72, 120, 168, 216, 264].forEach(function (y) { [68, 128, 188, 248].forEach(function (x) { v(x, y, 34, 34); }); });
+    v(60, 330, 64, 44); v(216, 330, 64, 44);
+</script>
+</body>
+</html>
